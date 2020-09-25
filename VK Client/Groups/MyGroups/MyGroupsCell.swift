@@ -1,0 +1,44 @@
+//
+//  MyGroupsCell.swift
+//  VK Client
+//
+//  Created by Rayen D on 06.09.2020.
+//  Copyright © 2020 Rayen D. All rights reserved.
+//
+
+import UIKit
+
+class MyGroupsCell: UITableViewCell {
+    
+    @IBOutlet weak var myGroupNameLabel: UILabel!
+    @IBOutlet weak var myGroupImage: UIImageView!
+    @IBOutlet weak var animateButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        myGroupImage.layer.cornerRadius = myGroupImage.frame.size.height / 2
+        animateButton.layer.cornerRadius = myGroupImage.frame.size.height / 2
+        myGroupImage.contentMode = .scaleAspectFill
+    }
+    
+    @IBAction func animatedImage(_ sender: UIButton) {
+        
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        
+        animation.fromValue = 0.8
+        animation.toValue = 1
+        animation.stiffness = 200
+        animation.mass = 5
+        animation.duration = 5
+        animation.fillMode = CAMediaTimingFillMode.backwards
+        
+        self.myGroupImage.layer.add(animation, forKey: nil)
+    }
+    
+    func configure(for model: Group) {
+        
+        myGroupNameLabel.text = model.nameGroup
+        myGroupImage.image = UIImage(named: model.imageGroup)
+    }
+}
