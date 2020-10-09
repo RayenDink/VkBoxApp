@@ -21,10 +21,7 @@ class PageViewController: UIPageViewController {
         
         setupSliderView()
         
-        if let imagesFriendController = showViewControllerAtIndex(0) {
-            setViewControllers([imagesFriendController],
-                               direction: .forward,
-                               animated: true)
+        fetchRequestPhotosUser(for: ownerID)
             
         }
         

@@ -12,7 +12,8 @@ class MyGroupsController: UITableViewController {
     
 // Объявляем экземпляр класса:
     let searchController = UISearchController(searchResultsController: nil)
-// Массив:
+    let networkManager = NetworkManager()
+         var myGroups = [Group]()    // Массив:
     var filteredGroups = [Group]()
 // Свойство определяющее является ли строка пустой или нет:
     var searchBarIsEmpty: Bool {
@@ -26,12 +27,13 @@ class MyGroupsController: UITableViewController {
         
         return searchController.isActive && !searchBarIsEmpty
     }
-    var myGroups = [Group]()
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupSearchController()
+        fetchRequestGroupsUser()
     }
 
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -41,17 +43,46 @@ class MyGroupsController: UITableViewController {
             if let indexPath = availableGroups.tableView.indexPathForSelectedRow {
                 let group = availableGroups.allGroups[indexPath.row]
                 
-                if !myGroups.contains(where: {$0.nameGroup == group.nameGroup}) {
+                if !myGroups.contains(where: {$0.id == group.id}) {
                     myGroups.append(group)
                     tableView.reloadData()
                 } else {
-                    
                     let alert = UIAlertController(title: "Choose another group",
                                                   message: "This group already exists on your list",
                                                   preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .cancel)
                     alert.addAction(alertAction)
+                    
                     present(alert, animated: true)
+                }
+                       }
+                   }
+               }
+
+                // MARK: Help Function
+               
+               func fetchRequestGroupsUser() {
+
+                    networkManager.fetchRequestGroupsUser { [weak self] groups in
+
+                        for group in groups {
+
+                            self?.myGroups.append(group)
+
+                            DispatchQueue.main.async {
+                               self?.tableView.reloadData()
+                           }
+//                if !myGroups.contains(where: {$0.nameGroup == group.nameGroup}) {
+//                    myGroups.append(group)
+//                    tableView.reloadData()
+//                } else {
+//                    
+//                    let alert = UIAlertController(title: "Choose another group",
+//                                                  message: "This group already exists on your list",
+//                                                  preferredStyle: .alert)
+//                    let alertAction = UIAlertAction(title: "OK", style: .cancel)
+//                    alert.addAction(alertAction)
+//                    present(alert, animated: true)
                 }
             }
         }

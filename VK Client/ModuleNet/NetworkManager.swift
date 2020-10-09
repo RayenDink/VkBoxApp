@@ -1,6 +1,13 @@
+//
+//  NetworkManager.swift
+//  VK Client
+//
+//  Created by Rayen on 10/2/20.
+//  Copyright © 2020 Rayen D. All rights reserved.//
+
 import Foundation
 
-class INet {
+class NetworkManager {
     
     private var urlComponents = URLComponents()
     private let constants = ConstNet()
@@ -34,13 +41,13 @@ class INet {
         guard let url = urlComponents.url else { return nil }
         let request = URLRequest(url: url)
         
-        fetchRequestFriends()
+        
         return request
     }
     
     // MARK: Friends
     
-    func fetchRequestFriends() {
+    func fetchRequestFriends(completion: @escaping ([User]) -> ()) {
         
         urlComponents.path = "/method/friends.get"
         
@@ -51,25 +58,28 @@ class INet {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-        let task = session.dataTask(with: urlComponents.url!) { (data, response, error) in
+      session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
             
             do {
                 
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                let decoder = JSONDecoder()
+
+                           decoder.keyDecodingStrategy = .convertFromSnakeCase
+                          guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else { return }
                 
-                print(json)
+                completion(friends)
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-        task.resume()
+       .resume()
     }
     // MARK: Photos User
     
-    func fetchRequestPhotosUser(for ownerID: Int?) {
+    func fetchRequestPhotosUser(for ownerID: Int?), completion: @escaping ([Photo]) -> ()) {
         
         urlComponents.path = "/method/photos.getAll"
         
@@ -83,25 +93,25 @@ class INet {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-        let task = session.dataTask(with: urlComponents.url!) { (data, response, error) in
+       session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
             
             do {
                 
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                
-                print(json)
+    let decoder = JSONDecoder()
+
+                     decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    guard let photo = try decoder.decode(Response<Photo>.self, from: data).response?.items else { return }
+              
             } catch {
                 print(error.localizedDescription)
             }
-        }
-        
-        task.resume()
+        }.resume()
     }
     // MARK: Groups User
     
-    func fetchRequestGroupsUser() {
+    func fetchRequestGroupsUser(completion: @escaping ([Group]) -> ()) {
         
         urlComponents.path = "/method/groups.get"
         
@@ -112,26 +122,29 @@ class INet {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-        let task = session.dataTask(with: urlComponents.url!) { (data, response, error) in
+session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
             
             do {
                 
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                let decoder = JSONDecoder()
                 
-                print(json)
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                      guard let groups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
+
+                       completion(groups)
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-        task.resume()
+        .resume()
     }
     
     // MARK: Search Groups
     
-    func fetchRequestSearchGroups(text: String?) {
+    func fetchRequestSearchGroups(text: String?, completion: @escaping ([Group]) -> ()) {
         
         urlComponents.path = "/method/groups.search"
         
@@ -141,20 +154,23 @@ class INet {
             URLQueryItem(name: "v", value: constants.versionAPI),
         ]
         
-        let task = session.dataTask(with: urlComponents.url!) { (data, response, error) in
+        session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
             
             do {
                 
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                let decoder = JSONDecoder()
                 
-                print(json)
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                  guard let searchGroups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
+
+                   completion(searchGroups)
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-        task.resume()
+        .resume()
     }
 }

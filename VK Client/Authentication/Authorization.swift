@@ -22,7 +22,7 @@ class AuthorizationWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let request = INet().fetchRequestAuthorization() else { return }
+        guard let request = NetManage().fetchRequestAuthorization() else { return }
         webView.load(request)
     }
 }

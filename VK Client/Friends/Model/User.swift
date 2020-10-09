@@ -7,10 +7,17 @@
 //
 
 import Foundation
-
-struct User {
+import RealmSwift
+class User: Decodable {
     
-    var nameSurnameFriend: String
-    var imageFriend: [String]
+    @objc dynamic var id = 0
+    @objc dynamic var firstName: String?
+    @objc dynamic var lastName: String?
+    @objc dynamic var photo100: String?
+    
+    func returnFullName() -> String? {
+
+        return "\(firstName ?? "") \(lastName ?? "")"
+   }
 }
 

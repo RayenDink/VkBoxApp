@@ -7,8 +7,9 @@
 //
 import Foundation
 
-struct Group {
+class Group: Decodable {
     
-    var nameGroup: String
-    var imageGroup: String
+    var id: Int?
+    var name: String?
+    var photo50: String?
 }

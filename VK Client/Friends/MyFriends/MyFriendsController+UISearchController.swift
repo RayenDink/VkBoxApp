@@ -34,7 +34,8 @@ extension MyFriendsController: UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String) {
         
         filteredUsers = friends.filter{ (user: User) -> Bool in
-            return user.nameSurnameFriend.contains(searchText)
+            guard let name = user.returnFullName() else { return false }
+             return name.contains(searchText)
         }
         
         tableView.reloadData()

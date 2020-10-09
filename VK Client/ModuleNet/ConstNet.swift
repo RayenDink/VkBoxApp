@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 struct ConstNet {
 
     let scheme = "https"
