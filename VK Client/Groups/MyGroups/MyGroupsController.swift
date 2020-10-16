@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsController: UITableViewController {
     
 // Объявляем экземпляр класса:
     let searchController = UISearchController(searchResultsController: nil)
-    let networkManager = NetworkManager()
+    let realmManager = RealmManager
          var myGroups = [Group]()    // Массив:
     var filteredGroups = [Group]()
 // Свойство определяющее является ли строка пустой или нет:
@@ -76,7 +77,7 @@ class MyGroupsController: UITableViewController {
 //                    myGroups.append(group)
 //                    tableView.reloadData()
 //                } else {
-//                    
+//
 //                    let alert = UIAlertController(title: "Choose another group",
 //                                                  message: "This group already exists on your list",
 //                                                  preferredStyle: .alert)
