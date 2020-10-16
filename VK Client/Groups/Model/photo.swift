@@ -8,15 +8,17 @@
 
 import Foundation
 import RealmSwift
-class Photo: Object, Decodable {
+
+class Group: Object, Decodable {
     @objc dynamic var id = 0
-    @objc dynamic var ownerId = 0
-    var sizes = List<Sizes>()
+    @objc dynamic var name: String? = nil
+    @objc dynamic var photo50: String? = nil
+    
     override static func primaryKey() -> String? {
         return "id"
     }
     
     override static func indexedProperties() -> [String] {
-        return ["ownerId"]
+        return ["name"]
     }
 }
