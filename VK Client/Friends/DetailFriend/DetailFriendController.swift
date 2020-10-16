@@ -46,8 +46,8 @@ class DetailFriendController: UICollectionViewController {
         
         let pageViewController = segue.destination as? PageViewController
         
+        pageViewController?.fetchRequestPhotosUser(for: ownerID)
         pageViewController?.titleItem = titleItem
-        pageViewController?.imagesUser = friendsImage
     }
 
     // MARK: UICollectionViewDataSource

@@ -26,5 +26,15 @@ class DetailFriendCell: UICollectionViewCell {
     func configure(for model: User) {
         
         detailFriendImage.image = UIImage(named: model.imageFriend.first!)
+        
+        func configure(for model: Sizes) {
+            guard let url = model.src,
+                  
+                  let imageURL = URL(string: url),
+                  let imageData = try? Data(contentsOf: imageURL) else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.detailFriendImage.image = UIImage(data: imageData)
+            }
+        }
     }
 }

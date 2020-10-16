@@ -6,14 +6,15 @@
 //  Copyright © 2020 Rayen D. All rights reserved.
 //
 import UIKit
+import RealmSwift
 
 class MyFriendsController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-    let networkManager = NetworkManager()
-         var friends = [User]()
-         var friendsSection = [String]()
-         var friendsDictionary = [String: [User]]()
+    let realmManager = realmManager()
+    var friends = [User]()
+    var friendsSection = [String]()
+    var friendsDictionary = [String: [User]]()
     var filteredUsers = [User]()
     var searchBarIsEmpty: Bool {
         
@@ -27,7 +28,7 @@ class MyFriendsController: UITableViewController {
         
         return searchController.isActive && !searchBarIsEmpty
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchRequestFriends()
@@ -39,28 +40,24 @@ class MyFriendsController: UITableViewController {
     // MARK: - Help Function
     
     private func fetchRequestFriends() {
+        do {
+            let realm = try Realm()
+            let friend = realm.objects(User.self)
+            friends = Array(friend)
+        } catch {
+            print(error)
+        }
+        sortFriend()
         
-        networkManager.fetchRequestFriends { [weak self] users in
-            for user in users {
-
-                         self?.friends.append(user)
-
-                         DispatchQueue.main.async {
-                            self?.tableView.reloadData()
-                        }
-                    }
-                    self?.sortFriend()
-                }
-
-             }
-
-             private func sortFriend() {
-
-                 for friend in friends {
-
-                     guard let name = friend.returnFullName() else { return }
-                    let key = "\(name[name.startIndex])"
-
+    }
+    
+    private func sortFriend() {
+        
+        for friend in friends {
+            
+            guard let name = friend.returnFullName() else { return }
+            let key = "\(name[name.startIndex])"
+            
             if var friendValue = friendsDictionary[key] {
                 friendValue.append(friend)
                 friendsDictionary[key] = friendValue
@@ -71,9 +68,9 @@ class MyFriendsController: UITableViewController {
             friendsSection = [String](friendsDictionary.keys).sorted()
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if isFiltering {
@@ -83,7 +80,7 @@ class MyFriendsController: UITableViewController {
         return friendsSection.count
     }
     
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if isFiltering {
@@ -97,7 +94,7 @@ class MyFriendsController: UITableViewController {
         }
         return 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
@@ -162,6 +159,7 @@ class MyFriendsController: UITableViewController {
                 if isFiltering {
                     
                     let friends = filteredUsers[indexPath.row]
+                    detailFriendController?.fetchRequestPhotosUser(for: friends.id)
                     
                     detailFriendController?.titleItem = friends.returnFullName
                     detailFriendController?.friendsImage.removeAll()
@@ -172,8 +170,9 @@ class MyFriendsController: UITableViewController {
                     
                     if let friendValue = friendsDictionary[friendKey.uppercased()] {
                         let friendsValue = friendValue[indexPath.row]
+                        detailFriendController?.fetchRequestPhotosUser(for: friendsValue.id)
                         detailFriendController?.titleItem = friendsValue.returnFullName()
-
+                        
                         detailFriendController?.friendsImage.removeAll()
                         detailFriendController?.friendsImage.append(friendsValue)
                     }

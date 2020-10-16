@@ -9,7 +9,9 @@
 import UIKit
 
 class LoadViewController: UIViewController {
-
+    
+    private let realmManager = RealmManager()
+    
     @IBOutlet weak var firstPointLoad: UILabel!
     @IBOutlet weak var secondPointLoad: UILabel!
     @IBOutlet weak var thirdPointLoad: UILabel!
@@ -17,7 +19,8 @@ class LoadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        realmManager.updateFriends()
+        realmManager.updateGroups()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +43,7 @@ class LoadViewController: UIViewController {
                        animations: {
                         self.firstPointLoad.transform = .identity
                         self.firstPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
         
         UIView.animate(withDuration: 1.5,
@@ -49,7 +52,7 @@ class LoadViewController: UIViewController {
                        animations: {
                         self.secondPointLoad.transform = .identity
                         self.secondPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
         
         UIView.animate(withDuration: 1.5,
@@ -59,7 +62,7 @@ class LoadViewController: UIViewController {
                         
                         self.thirdPointLoad.transform = .identity
                         self.thirdPointLoad.alpha = 0.2
-        },
+                       },
                        completion: nil)
     }
     
@@ -123,7 +126,7 @@ class LoadViewController: UIViewController {
     
     func goToTapBarController() {
         
-// Откладываем на 5 секунд:
+        // Откладываем на 5 секунд:
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "TapBar") as UIViewController

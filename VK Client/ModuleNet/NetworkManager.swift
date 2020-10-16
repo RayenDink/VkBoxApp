@@ -69,7 +69,10 @@ class NetworkManager {
                            decoder.keyDecodingStrategy = .convertFromSnakeCase
                           guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else { return }
                 
-                completion(friends)
+                DispatchQueue.main.async {
+
+                                      completion(friends)
+                                 }
             } catch {
                 print(error.localizedDescription)
             }
