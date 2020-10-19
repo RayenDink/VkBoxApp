@@ -38,9 +38,12 @@ class MyFriendsCell: UITableViewCell {
     
     func configure(for model: User) {
         
-        guard let name = model.returnFullName() else { return }
-        
-        nameSurnameLabel.text = name
+        //        guard let name = model.returnFullName() else { return }
+        //
+        //        nameSurnameLabel.text = name
+        guard let name = model.firstName,
+              let lastName = model.lastName else { return }
+        nameSurnameLabel.text = name + " " + lastName
         
         guard let url = model.photo100,
               

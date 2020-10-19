@@ -12,16 +12,16 @@ extension MyFriendsController: UISearchResultsUpdating {
     
     
     func setupSearchController() {
-    
-// Получаем инфо об изменении текста:
+        
+        // Получаем инфо об изменении текста:
         searchController.searchResultsUpdater = self
-// Запрет взаимодействия с контентом при вводе:
+        // Запрет взаимодействия с контентом при вводе:
         searchController.obscuresBackgroundDuringPresentation = false
-// Название строки поиска:
+        // Название строки поиска:
         searchController.searchBar.placeholder = "Search Friends"
-// Расположение:
+        // Расположение:
         navigationItem.searchController = searchController
-// Строка поиска при переходе:
+        // Строка поиска при переходе:
         definesPresentationContext = true
     }
     
@@ -34,8 +34,13 @@ extension MyFriendsController: UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String) {
         
         filteredUsers = friends.filter{ (user: User) -> Bool in
-            guard let name = user.returnFullName() else { return false }
-             return name.contains(searchText)
+            guard let name = user.firstName,
+                  let lastName = user.lastName else { return false }
+            let fullName = name + " " + lastName
+            return fullName.contains(searchText)
+            
+            //            guard let name = user.returnFullName() else { return false }
+            //             return name.contains(searchText)
         }
         
         tableView.reloadData()

@@ -11,7 +11,7 @@ import RealmSwift
 
 class RealmManager {
     
-    private let networkManager = NetworkManager()
+//    private let networkManager = NetworkManager()
     func updateFriends() {
         
         networkManager.fetchRequestFriends { friends in
