@@ -49,6 +49,7 @@
 		A34AA91B253081A4004FD4DE /* File.lock in Sources */ = {isa = PBXBuildFile; fileRef = A34AA91A253081A4004FD4DE /* File.lock */; };
 		A34AA91F253081E8004FD4DE /* Fail in Resources */ = {isa = PBXBuildFile; fileRef = A34AA91E253081E8004FD4DE /* Fail */; };
 		A34AA922253082E0004FD4DE /* photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AA921253082E0004FD4DE /* photo.swift */; };
+		A38BC2052540F9420009BA4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A38BC2042540F9420009BA4B /* GoogleService-Info.plist */; };
 		A3D212D425393F6E000F7B57 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D212D325393F6E000F7B57 /* RealmManager.swift */; };
 		A3F590BB251D97DE0029AEEC /* PrivateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F590BA251D97DE0029AEEC /* PrivateSession.swift */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,9 @@
 		A34AA91A253081A4004FD4DE /* File.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.lock; sourceTree = "<group>"; };
 		A34AA91E253081E8004FD4DE /* Fail */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fail; sourceTree = "<group>"; };
 		A34AA921253082E0004FD4DE /* photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photo.swift; sourceTree = "<group>"; };
+		A38BC2042540F9420009BA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3BCA0432542809C00874B80 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile"; sourceTree = "<absolute>"; };
+		A3BCA0442542809C00874B80 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile.lock; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile.lock"; sourceTree = "<absolute>"; };
 		A3D212D325393F6E000F7B57 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		A3F590BA251D97DE0029AEEC /* PrivateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -261,6 +265,8 @@
 		6B68F98C24EFA4D600370BE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3BCA0432542809C00874B80 /* Podfile */,
+				A3BCA0442542809C00874B80 /* Podfile.lock */,
 				6B978B5C24D17F290073AA20 /* AppDelegate.swift */,
 				6B978B5E24D17F290073AA20 /* SceneDelegate.swift */,
 				6B978B6A24D17F2A0073AA20 /* Info.plist */,
@@ -288,6 +294,7 @@
 		6B978B5B24D17F290073AA20 /* VK Client */ = {
 			isa = PBXGroup;
 			children = (
+				A38BC2042540F9420009BA4B /* GoogleService-Info.plist */,
 				A3F590B6251D96760029AEEC /* ModuleNet */,
 				6B2DD42C24DAC6E200218FED /* Authentication */,
 				6B0772CD25021D1400BB9B8A /* LoadView */,
@@ -352,7 +359,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Rayen D";
 				TargetAttributes = {
 					6B978B5824D17F290073AA20 = {
@@ -385,6 +392,7 @@
 			files = (
 				6B978B6924D17F2A0073AA20 /* LaunchScreen.storyboard in Resources */,
 				6B978B6624D17F2A0073AA20 /* Assets.xcassets in Resources */,
+				A38BC2052540F9420009BA4B /* GoogleService-Info.plist in Resources */,
 				A34AA91F253081E8004FD4DE /* Fail in Resources */,
 				6B978B6424D17F290073AA20 /* Main.storyboard in Resources */,
 			);
@@ -488,6 +496,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -548,6 +557,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
