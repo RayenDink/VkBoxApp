@@ -72,14 +72,14 @@ class PageViewController: UIPageViewController {
             return imagesFriendController
         }
         
-        private func setupSliderView() {
+        func setupSliderView() {
             
             for (_,imageName) in imagesUser.enumerated() {
                 imagesName.append(contentsOf: imageName.imageFriend)
             }
         }
         
-        private func setupNavigationBar() {
+        func setupNavigationBar() {
             
             if let topItem = navigationController?.navigationBar.topItem {
                 
@@ -110,4 +110,5 @@ class PageViewController: UIPageViewController {
                 
                 return showViewControllerAtIndex(pageNumber)
             }
+        }
         }

@@ -50,6 +50,7 @@
 		A34AA91F253081E8004FD4DE /* Fail in Resources */ = {isa = PBXBuildFile; fileRef = A34AA91E253081E8004FD4DE /* Fail */; };
 		A34AA922253082E0004FD4DE /* photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AA921253082E0004FD4DE /* photo.swift */; };
 		A38BC2052540F9420009BA4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A38BC2042540F9420009BA4B /* GoogleService-Info.plist */; };
+		A3BCA0482542A04D00874B80 /* FirebaseManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCA0472542A04D00874B80 /* FirebaseManage.swift */; };
 		A3D212D425393F6E000F7B57 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D212D325393F6E000F7B57 /* RealmManager.swift */; };
 		A3F590BB251D97DE0029AEEC /* PrivateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F590BA251D97DE0029AEEC /* PrivateSession.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		A38BC2042540F9420009BA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3BCA0432542809C00874B80 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile"; sourceTree = "<absolute>"; };
 		A3BCA0442542809C00874B80 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile.lock; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile.lock"; sourceTree = "<absolute>"; };
+		A3BCA0472542A04D00874B80 /* FirebaseManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManage.swift; sourceTree = "<group>"; };
 		A3D212D325393F6E000F7B57 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		A3F590BA251D97DE0029AEEC /* PrivateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -328,6 +330,7 @@
 				A34AA91A253081A4004FD4DE /* File.lock */,
 				A31D7D9E252B34D600B6EFAE /* Response.swift */,
 				A31D7DA1252B352A00B6EFAE /* Item.swift */,
+				A3BCA0472542A04D00874B80 /* FirebaseManage.swift */,
 			);
 			path = ModuleNet;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				6B37E99A24FD390600A371EC /* NewsViewController+UITableViewController.swift in Sources */,
 				6B978B7324D1874F0073AA20 /* LoginViewController.swift in Sources */,
 				6B4054DB24D63C2300AAEC22 /* AvailableGroupsCell.swift in Sources */,
+				A3BCA0482542A04D00874B80 /* FirebaseManage.swift in Sources */,
 				A31D7D9F252B34D600B6EFAE /* Response.swift in Sources */,
 				6B4054D124D63B6E00AAEC22 /* DetailFriendController.swift in Sources */,
 				A34AA91525307FA5004FD4DE /* photo.swift in Sources */,
