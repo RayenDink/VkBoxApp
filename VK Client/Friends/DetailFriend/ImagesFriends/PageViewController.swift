@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PageViewController: UIPageViewController {
     
@@ -22,61 +23,92 @@ class PageViewController: UIPageViewController {
         setupSliderView()
         
         fetchRequestPhotosUser(for: ownerID)
-            
-        }
         
-        setupNavigationBar()
     }
-    
-    func showViewControllerAtIndex(_ index: Int) -> ImagesFriendController? {
-                
-        guard index >= 0, index < imagesName.count,
-            let imagesFriendController = storyboard?.instantiateViewController(withIdentifier: "ImagesFriendController") as? ImagesFriendController
-            else { return nil }
-        
-        imagesFriendController.images = UIImage(named: imagesName[index])
-        imagesFriendController.currentPage = index
-        imagesFriendController.numberOfPages = imagesName.count
-        
-        return imagesFriendController
-    }
-    
-    private func setupSliderView() {
-        
-        for (_,imageName) in imagesUser.enumerated() {
-            imagesName.append(contentsOf: imageName.imageFriend)
-        }
-    }
-    
-    private func setupNavigationBar() {
-        
-        if let topItem = navigationController?.navigationBar.topItem {
-            
-            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        }
-        
-        guard titleItem != nil else { return }
-        title = titleItem
-    }
-}
+    func fetchRequestPhotosUser(for id: Int?) {
+        realmManager.updatePhotos(for: id)
+        do {
+            let realm = try Realm()
+            do {
+                         let realm = try Realm()
+            let photo = realm.objects(Photo.self)
+                imagesUser = Array(photo)
 
-extension PageViewController: UIPageViewControllerDataSource {
-    
-// Переход назад
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+                         } catch {
+                            print(error)}
+            DispatchQueue.main.async { [weak self] in
+
+                        self?.setupView()
+                   }
+
+                    self.setupSliderView()
+            
+            friendsImage = Array(photo).first
+            
+        } catch {
+            
+            print(error)
+            setupNavigationBar()
+        }
         
-        var pageNumber = (viewController as! ImagesFriendController).currentPage
-        pageNumber -= 1
+        func showViewControllerAtIndex(_ index: Int) -> ImagesFriendController? {
+            
+            guard index >= 0, index < imagesName.count,
+                  let imagesFriendController = storyboard?.instantiateViewController(withIdentifier: "ImagesFriendController") as? ImagesFriendController
+            else { return nil }
+            guard let url = imagesSize[index].src,
+
+                            let imageURL = URL(string: url),
+                            let imageData = try? Data(contentsOf: imageURL) else { return nil }
+            DispatchQueue.main.async {
+                magesFriendController.imagesFriend.image = UIImage(data: imageData)
+
+                              imagesFriendController.view.reloadInputViews()
+            
+            imagesFriendController.images = UIImage(named: imagesName[index])
+            imagesFriendController.currentPage = index
+            imagesFriendController.numberOfPages = imagesName.count
+            
+            return imagesFriendController
+        }
         
-        return showViewControllerAtIndex(pageNumber)
-    }
-    
-// Переход вперед
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        func setupSliderView() {
+            
+            for (_,imageName) in imagesUser.enumerated() {
+                imagesName.append(contentsOf: imageName.imageFriend)
+            }
+        }
         
-        var pageNumber = (viewController as! ImagesFriendController).currentPage
-        pageNumber += 1
+        func setupNavigationBar() {
+            
+            if let topItem = navigationController?.navigationBar.topItem {
+                
+                topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            }
+            
+            guard titleItem != nil else { return }
+            title = titleItem
+        }
         
-        return showViewControllerAtIndex(pageNumber)
-    }
-}
+        
+        extension PageViewController: UIPageViewControllerDataSource {
+            
+            // Переход назад
+            func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+                
+                var pageNumber = (viewController as! ImagesFriendController).currentPage
+                pageNumber -= 1
+                
+                return showViewControllerAtIndex(pageNumber)
+            }
+            
+            // Переход вперед
+            func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+                
+                var pageNumber = (viewController as! ImagesFriendController).currentPage
+                pageNumber += 1
+                
+                return showViewControllerAtIndex(pageNumber)
+            }
+        }
+        }

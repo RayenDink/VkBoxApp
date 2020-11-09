@@ -58,59 +58,62 @@ class NetworkManager {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-      session.dataTask(with: urlComponents.url!) { (data, response, error) in
+        session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
             
             do {
                 
                 let decoder = JSONDecoder()
-
-                           decoder.keyDecodingStrategy = .convertFromSnakeCase
-                          guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else { return }
+                
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let friends = try decoder.decode(Response<User>.self, from: data).response?.items else { return }
                 
                 DispatchQueue.main.async {
-
-                                      completion(friends)
-                                 }
+                    
+                    self?.realmManager.updateFriends(for: friends)
+                }
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-       .resume()
+        .resume()
     }
     // MARK: Photos User
     
-    func fetchRequestPhotosUser(for ownerID: Int?), completion: @escaping ([Photo]) -> ()) {
-        
-        urlComponents.path = "/method/photos.getAll"
-        
-        guard let ownerID = ownerID else { return }
-        urlComponents.queryItems = [
-            URLQueryItem(name: "owner_id", value: String(ownerID)),
-            URLQueryItem(name: "photo_sizes", value: "1"),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "count", value: "20"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.versionAPI)
-        ]
-        
-       session.dataTask(with: urlComponents.url!) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
-            do {
-                
+    func fetchRequestPhotosUser(for ownerID: Int?);, completion: @escaping ([Photo]) -> ()) {
+    
+    urlComponents.path = "/method/photos.getAll"
+    
+    guard let ownerID = ownerID else { return }
+    urlComponents.queryItems = [
+    URLQueryItem(name: "owner_id", value: String(ownerID)),
+    URLQueryItem(name: "photo_sizes", value: "1"),
+    URLQueryItem(name: "extended", value: "1"),
+    URLQueryItem(name: "count", value: "20"),
+    URLQueryItem(name: "access_token", value: Session.shared.token),
+    URLQueryItem(name: "v", value: constants.versionAPI)
+    ]
+    
+    session.dataTask(with: urlComponents.url!) { (data, response, error) in
+    
+    guard let data = data else { return }
+    
+    do {
+    
     let decoder = JSONDecoder()
-
-                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    guard let photo = try decoder.decode(Response<Photo>.self, from: data).response?.items else { return }
-              
-            } catch {
-                print(error.localizedDescription)
-            }
-        }.resume()
+    
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    guard let photo = try decoder.decode(Response<Photo>.self, from: data).response?.items else { return }
+    DispatchQueue.main.async {
+    
+    self?.realmManager.updatePhotos(for: photo)
+    }
+    } catch {
+    print(error.localizedDescription)
+    }
+    }.resume()
     }
     // MARK: Groups User
     
@@ -125,38 +128,6 @@ class NetworkManager {
             URLQueryItem(name: "v", value: constants.versionAPI)
         ]
         
-session.dataTask(with: urlComponents.url!) { (data, response, error) in
-            
-            guard let data = data else { return }
-            
-            do {
-                
-                let decoder = JSONDecoder()
-                
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                      guard let groups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
-
-                       completion(groups)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
-        .resume()
-    }
-    
-    // MARK: Search Groups
-    
-    func fetchRequestSearchGroups(text: String?, completion: @escaping ([Group]) -> ()) {
-        
-        urlComponents.path = "/method/groups.search"
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "q", value: text),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.versionAPI),
-        ]
-        
         session.dataTask(with: urlComponents.url!) { (data, response, error) in
             
             guard let data = data else { return }
@@ -166,14 +137,95 @@ session.dataTask(with: urlComponents.url!) { (data, response, error) in
                 let decoder = JSONDecoder()
                 
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                  guard let searchGroups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
-
-                   completion(searchGroups)
-            } catch {
-                print(error.localizedDescription)
+                guard let groups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
+                
+                DispatchQueue.main.async {
+                    self?.realmManager.updateGroups(for: groups)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
+            
+            .resume()
         }
         
-        .resume()
+        // MARK: Search Groups
+        
+        func fetchRequestSearchGroups(text: String?, completion: @escaping ([Group]) -> ()) {
+            
+            urlComponents.path = "/method/groups.search"
+            
+            urlComponents.queryItems = [
+                URLQueryItem(name: "q", value: text),
+                URLQueryItem(name: "access_token", value: Session.shared.token),
+                URLQueryItem(name: "v", value: constants.versionAPI),
+            ]
+            
+            session.dataTask(with: urlComponents.url!) { (data, response, error) in
+                
+                guard let data = data else { return }
+                
+                do {
+                    
+                    let decoder = JSONDecoder()
+                    
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    guard let searchGroups = try decoder.decode(Response<Group>.self, from: data).response?.items else { return }
+                    
+                    completion(searchGroups)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            .resume()
+        }
+        // MARK: - News
+           
+           func fetchRequestNews(completion: @escaping ([NewsModel]) -> Void) {
+               urlComponents.path = "/method/newsfeed.get"
+
+               urlComponents.queryItems = [
+                   URLQueryItem(name: "filters", value: "post"),
+                   URLQueryItem(name: "count", value: "50"),
+                   URLQueryItem(name: "access_token", value: Session.shared.token),
+                   URLQueryItem(name: "v", value: constants.versionAPI)
+               ]
+
+
+               let task = session.dataTask(with: urlComponents.url!) { (data, response, error) in
+
+                   guard let data = data else { return }
+
+                   let decoder = JSONDecoder()
+
+                   decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                   guard var news = try? decoder.decode(Response<NewsModel>.self, from: data).response?.items else { return }
+                   guard let profiles = try? decoder.decode(ResponseNews.self, from: data).response.profiles else { return }
+                   guard let groups = try? decoder.decode(ResponseNews.self, from: data).response.groups else { return }
+
+                   for i in 0..<news.count {
+                       if news[i].sourceId < 0 {
+                           let group = groups.first(where: { $0.id == -news[i].sourceId })
+                           news[i].avatarUrl = group?.photo100
+                           news[i].creatorName = group?.name
+                       } else {
+                           let profile = profiles.first(where: { $0.id == news[i].sourceId })
+                           news[i].avatarUrl = profile?.photo100
+                           news[i].creatorName = profile?.firstName
+                       }
+                   }
+
+                   DispatchQueue.main.async {
+                       completion(news)
+                   }
+               }
+
+               DispatchQueue.global(qos: .utility).async {
+                   task.resume()
+               }
+
+           }
     }
 }

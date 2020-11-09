@@ -11,6 +11,7 @@ import UIKit
 class AvailableGroupsController: UITableViewController {
     let searchController = UISearchController(searchResultsController: nil)
          let networkManager = NetworkManager()
+    let firebaseManager = FirebaseManager()
 // Дефолтный массив:
     var allGroups = [Group]()
          var searchBarIsEmpty: Bool {
@@ -75,5 +76,14 @@ class AvailableGroupsController: UITableViewController {
         
         return cell
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+              if let indexPath = self.tableView.indexPathForSelectedRow {
+
+                  guard let userID = Session.shared.userId else { return }
+                 let group = allGroups[indexPath.row]
+
+                  firebaseManager.saveUserGroups(userID: userID, group: group)
+             }
+         }
 }

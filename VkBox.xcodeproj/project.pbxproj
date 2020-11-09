@@ -49,8 +49,12 @@
 		A34AA91B253081A4004FD4DE /* File.lock in Sources */ = {isa = PBXBuildFile; fileRef = A34AA91A253081A4004FD4DE /* File.lock */; };
 		A34AA91F253081E8004FD4DE /* Fail in Resources */ = {isa = PBXBuildFile; fileRef = A34AA91E253081E8004FD4DE /* Fail */; };
 		A34AA922253082E0004FD4DE /* photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AA921253082E0004FD4DE /* photo.swift */; };
+		A38BC2052540F9420009BA4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A38BC2042540F9420009BA4B /* GoogleService-Info.plist */; };
+		A3BCA0482542A04D00874B80 /* FirebaseManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BCA0472542A04D00874B80 /* FirebaseManage.swift */; };
 		A3D212D425393F6E000F7B57 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D212D325393F6E000F7B57 /* RealmManager.swift */; };
 		A3F590BB251D97DE0029AEEC /* PrivateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F590BA251D97DE0029AEEC /* PrivateSession.swift */; };
+		A3F7F1C625598E31000FB2DE /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F7F1C525598E31000FB2DE /* News.swift */; };
+		A3F7F1C925598ECA000FB2DE /*  DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F7F1C825598ECA000FB2DE /*  DateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,8 +102,14 @@
 		A34AA91A253081A4004FD4DE /* File.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.lock; sourceTree = "<group>"; };
 		A34AA91E253081E8004FD4DE /* Fail */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fail; sourceTree = "<group>"; };
 		A34AA921253082E0004FD4DE /* photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photo.swift; sourceTree = "<group>"; };
+		A38BC2042540F9420009BA4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3BCA0432542809C00874B80 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile"; sourceTree = "<absolute>"; };
+		A3BCA0442542809C00874B80 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile.lock; path = "/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile.lock"; sourceTree = "<absolute>"; };
+		A3BCA0472542A04D00874B80 /* FirebaseManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManage.swift; sourceTree = "<group>"; };
 		A3D212D325393F6E000F7B57 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		A3F590BA251D97DE0029AEEC /* PrivateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateSession.swift; sourceTree = "<group>"; };
+		A3F7F1C525598E31000FB2DE /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		A3F7F1C825598ECA000FB2DE /*  DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " DateFormat.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				6B37E99724FD379300A371EC /* NewsViewController.swift */,
+				A3F7F1C525598E31000FB2DE /* News.swift */,
 				6B37E99B24FD396600A371EC /* NewsCell.swift */,
 				6B37E99924FD390600A371EC /* NewsViewController+UITableViewController.swift */,
 			);
@@ -261,6 +272,8 @@
 		6B68F98C24EFA4D600370BE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3BCA0432542809C00874B80 /* Podfile */,
+				A3BCA0442542809C00874B80 /* Podfile.lock */,
 				6B978B5C24D17F290073AA20 /* AppDelegate.swift */,
 				6B978B5E24D17F290073AA20 /* SceneDelegate.swift */,
 				6B978B6A24D17F2A0073AA20 /* Info.plist */,
@@ -288,6 +301,7 @@
 		6B978B5B24D17F290073AA20 /* VK Client */ = {
 			isa = PBXGroup;
 			children = (
+				A38BC2042540F9420009BA4B /* GoogleService-Info.plist */,
 				A3F590B6251D96760029AEEC /* ModuleNet */,
 				6B2DD42C24DAC6E200218FED /* Authentication */,
 				6B0772CD25021D1400BB9B8A /* LoadView */,
@@ -316,11 +330,13 @@
 			children = (
 				A3F590BA251D97DE0029AEEC /* PrivateSession.swift */,
 				A31D7D8D252738C800B6EFAE /* NetworkManager.swift */,
+				A3F7F1C825598ECA000FB2DE /*  DateFormat.swift */,
 				A31D7D9025273A1F00B6EFAE /* ConstNet.swift */,
 				A3D212D325393F6E000F7B57 /* RealmManager.swift */,
 				A34AA91A253081A4004FD4DE /* File.lock */,
 				A31D7D9E252B34D600B6EFAE /* Response.swift */,
 				A31D7DA1252B352A00B6EFAE /* Item.swift */,
+				A3BCA0472542A04D00874B80 /* FirebaseManage.swift */,
 			);
 			path = ModuleNet;
 			sourceTree = "<group>";
@@ -352,7 +368,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Rayen D";
 				TargetAttributes = {
 					6B978B5824D17F290073AA20 = {
@@ -385,6 +401,7 @@
 			files = (
 				6B978B6924D17F2A0073AA20 /* LaunchScreen.storyboard in Resources */,
 				6B978B6624D17F2A0073AA20 /* Assets.xcassets in Resources */,
+				A38BC2052540F9420009BA4B /* GoogleService-Info.plist in Resources */,
 				A34AA91F253081E8004FD4DE /* Fail in Resources */,
 				6B978B6424D17F290073AA20 /* Main.storyboard in Resources */,
 			);
@@ -407,6 +424,7 @@
 				6B37E99A24FD390600A371EC /* NewsViewController+UITableViewController.swift in Sources */,
 				6B978B7324D1874F0073AA20 /* LoginViewController.swift in Sources */,
 				6B4054DB24D63C2300AAEC22 /* AvailableGroupsCell.swift in Sources */,
+				A3BCA0482542A04D00874B80 /* FirebaseManage.swift in Sources */,
 				A31D7D9F252B34D600B6EFAE /* Response.swift in Sources */,
 				6B4054D124D63B6E00AAEC22 /* DetailFriendController.swift in Sources */,
 				A34AA91525307FA5004FD4DE /* photo.swift in Sources */,
@@ -414,11 +432,13 @@
 				6B4054CD24D63B0E00AAEC22 /* MyFriendsController.swift in Sources */,
 				6B37E98F24FD07AC00A371EC /* MyFriendsController+UISearchController.swift in Sources */,
 				A31D7D9425273BD900B6EFAE /* Authorization.swift in Sources */,
+				A3F7F1C625598E31000FB2DE /* News.swift in Sources */,
 				A3D212D425393F6E000F7B57 /* RealmManager.swift in Sources */,
 				A34AA91B253081A4004FD4DE /* File.lock in Sources */,
 				6B57811F25061FA4005F887C /* PageViewController.swift in Sources */,
 				6B37E99C24FD396600A371EC /* NewsCell.swift in Sources */,
 				6B4054E024D63E4F00AAEC22 /* Group.swift in Sources */,
+				A3F7F1C925598ECA000FB2DE /*  DateFormat.swift in Sources */,
 				6B978B5D24D17F290073AA20 /* AppDelegate.swift in Sources */,
 				6BDAA80024EFD2EF0013360C /* ShadowView.swift in Sources */,
 				6BB1F87424F010B400B19E30 /* LikeControl.swift in Sources */,
@@ -488,6 +508,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -548,6 +569,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/rayen/Desktop/Lesson10/VkBox.xcodeproj">
+      location = "group:/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/rayen/Documents/VkBoxApp/VK Client/Supporting Files/Podfile.lock">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
