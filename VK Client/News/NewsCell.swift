@@ -21,12 +21,25 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var dateGroup: UILabel!
     @IBOutlet weak var textFromGroup: UILabel!
     @IBOutlet weak var imageFromGroup: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    func configure(for model: User) {
+    @IBOutlet weak var commentsCountLabel: UILabel!
+        @IBOutlet weak var likeControl: LikeControl!
+    func configure(for model: NewsModel) {
+        self.dateGroup.text = model.getStringDate()
+                self.textFromGroup.text = model.text
+                self.likeControl.setLike(count: model.likes.count)
+                self.nameGroup.text = model.creatorName
+                self.commentsCountLabel.text = "\(model.comments.count)"
+
+                DispatchQueue.global().async {
+
+                    guard let url = model.avatarUrl,
+                          let imageURL = URL(string: url),
+                          let imageData = try? Data(contentsOf: imageURL) else { return }
+
+                    DispatchQueue.main.async { [weak self] in
+                        self?.imageGroup.image = UIImage(data: imageData)
+                    }
+                }
         
 //        nameGroup.text = model.nameSurnameFriend
 //        imageGroup.image = UIImage(named: model.imageFriend.last!)
